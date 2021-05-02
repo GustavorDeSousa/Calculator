@@ -11,7 +11,6 @@ import UIKit
 class ButtonsCalculatorCollectionViewCell: UICollectionViewCell {
     lazy var circleButtonView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 30
         return view
     }()
     
@@ -35,6 +34,10 @@ class ButtonsCalculatorCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        circleButtonView.layer.cornerRadius = circleButtonView.frame.height/2
+    }
     
     // MARK: - Setup
     func setup(buttonInfos: ButtonsCalculatorStruct) {

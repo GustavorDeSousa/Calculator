@@ -26,6 +26,7 @@ public final class CalculatorHomeView: UIView {
     private lazy var contentView = makeContentView()
     private lazy var screenInputView = makeScreenInputView()
     lazy var buttonsCollectionView = makeCollectionView()
+    lazy var inputValueLabel = makeScreenInputLabel()
 
     // MARK: - Functions Views
     private func makeContentView() -> UIView {
@@ -36,8 +37,16 @@ public final class CalculatorHomeView: UIView {
     
     private func makeScreenInputView() -> UIView {
         let view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = .clear
         return view
+    }
+    
+    private func makeScreenInputLabel() -> UILabel {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        return label
     }
     
     private func makeCollectionView() -> UICollectionView {
@@ -55,6 +64,7 @@ public final class CalculatorHomeView: UIView {
     private func addViews() {
         addSubview(contentView)
         contentView.addSubview(screenInputView)
+        screenInputView.addSubview(inputValueLabel)
         contentView.addSubview(buttonsCollectionView)
     }
     
@@ -69,10 +79,14 @@ public final class CalculatorHomeView: UIView {
             make.height.equalTo(DSSetings.Height.big)
         }
         
+        inputValueLabel.snp.makeConstraints { (make) in
+            make.edges.equalTo(screenInputView)
+        }
+        
         buttonsCollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(screenInputView.snp.bottom).offset(DSSetings.Margin.small)
             make.leading.trailing.bottom.equalTo(contentView).inset(DSSetings.Margin.medium)
-            make.height.equalTo(UIScreen.main.bounds.height * 0.6)
+            make.height.equalTo(UIScreen.main.bounds.height * 0.65)
         }
     }
 }
