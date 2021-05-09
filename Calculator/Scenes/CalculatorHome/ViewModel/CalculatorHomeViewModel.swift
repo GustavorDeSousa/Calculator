@@ -17,7 +17,6 @@ enum TYPES_CALCULATOR: String {
     case equal = "="
     case deleteChar = "C"
     case deleteAll = "CE"
-
 }
 
 protocol CalculatorHomeViewModelProtocol {
@@ -118,9 +117,11 @@ final class CalculatorHomeViewModel: CalculatorHomeViewModelProtocol {
         inputNumbers.forEach { (value) in
             if isNumber(value) {
                 if result == 0 {
-                    result = Double(value.replacingOccurrences(of: ",", with: ".")) ?? 0
+                    guard let updateResult = Double(value.replacingOccurrences(of: ",", with: ".")) else { return }
+                    result = updateResult
                 } else {
-                    calculate(signal, nextValue: Double(value.replacingOccurrences(of: ",", with: ".")) ?? 0)
+                    guard let valueCalculate = Double(value.replacingOccurrences(of: ",", with: ".")) else { return }
+                    calculate(signal, nextValue: valueCalculate)
                 }
             } else if isSignalChar(value) {
                 signal = value
