@@ -22,11 +22,13 @@ enum TYPES_CALCULATOR: String {
 protocol CalculatorHomeViewModelProtocol {
     func getList() -> [ButtonsCalculatorStruct]
     func getListCount() -> Int
-    func insertInfoCalculator(inputCalculator: String)
+    func insertValueCalculator(inputCalculator: String)
     func getInfoCalculator() -> [String]
+    func getValueResult() -> Double
 }
 
 final class CalculatorHomeViewModel: CalculatorHomeViewModelProtocol {
+    
     // MARK: - Variable and Constants
     private let buttonsCalculator = [
         ButtonsCalculatorStruct(textButton: "CE", colorButton: .lightGray),
@@ -52,7 +54,7 @@ final class CalculatorHomeViewModel: CalculatorHomeViewModelProtocol {
     ]
     
     var inputNumbers: [String] = []
-    var result: Double = 0
+    private var result: Double = 0
     
     // MARK: - Functions
     func getList() -> [ButtonsCalculatorStruct] {
@@ -63,7 +65,7 @@ final class CalculatorHomeViewModel: CalculatorHomeViewModelProtocol {
         return buttonsCalculator.count
     }
     
-    func insertInfoCalculator(inputCalculator: String) {
+    func insertValueCalculator(inputCalculator: String) {
         if inputNumbers.isEmpty {
             if !isSignalChar(inputCalculator) && isNumber(inputCalculator) {
                 inputNumbers.append(inputCalculator)
@@ -153,6 +155,10 @@ final class CalculatorHomeViewModel: CalculatorHomeViewModelProtocol {
     
     func getInfoCalculator() -> [String] {
         return inputNumbers
+    }
+    
+    func getValueResult() -> Double {
+        return result
     }
     
     private func isSignalChar(_ inputCalculator: String) -> Bool {

@@ -81,7 +81,7 @@ extension CalculatorHomeViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         let myList = viewModel.getList()
-        viewModel.insertInfoCalculator(inputCalculator: myList[indexPath.row].textButton)
+        viewModel.insertValueCalculator(inputCalculator: myList[indexPath.row].textButton)
     }
 }
 
